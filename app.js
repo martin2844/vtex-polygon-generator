@@ -3,7 +3,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 let addresses = ["Alsina 97, San Isidro", "Rodriguez Pena 455, CABA"];
-let googleKey = "YOUR_GOOGLE_API_KEY"
+let googleKey = "YOUR_API_KEY"
 
 //POLYGON GEN WORKS AS FOLLOWS--> This will be run in the loop below.
 // const coordinates = [-58.4861844, -34.5269672]; //[lon, lat]
@@ -23,7 +23,7 @@ const generatePolygons = async (addresses) => {
             let coordinatesAll = res.data.results[0].geometry.location;
             let coordinates = [coordinatesAll.lng, coordinatesAll.lat];
             let polygon = circleToPolygon(coordinates, 4500, 12);
-            fs.writeFileSync(`polygon${i}.json`, JSON.stringify(polygon));
+            fs.writeFileSync(`polygon${i}.json`, JSON.stringify(polygon.coordinates[0]));
         } catch (error) {
             console.log(error);   
         }
